@@ -1,0 +1,24 @@
+digraph structs {
+	graph [rankdir=LR, label="Browsing: _device-info._tcp"];
+	node [label="\N", color="#294b76", style=rounded, shape=box, fontname="Trebuchet MS"];
+	graph [lp="126,10",
+		bb="0,0,252,326"];
+	webserver [label=webserver, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,308", width="0.89", height="0.50"];
+	admin [label=admin, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,92", width="0.75", height="0.50"];
+	musicstudio [label=musicstudio, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,38", width="1.00", height="0.50"];
+	scc [label=scc, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,254", width="0.75", height="0.50"];
+	work [label=work, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,200", width="0.75", height="0.50"];
+	dev [label=dev, style=dotted, fillcolor="#116611", fontcolor="#111166", pos="216,146", width="0.75", height="0.50"];
+	0 [label="Toms Web Server (websrv)", pos="72,213", width="1.94", height="0.50"];
+	1 [label="Toms Laptop (asfur)", pos="72,132", width="1.53", height="0.50"];
+	2 [label="Toms MusicDesk (localhost)", pos="72,38", width="2.00", height="0.50"];
+	0 -> scc [pos="e,189,246 136,231 150,235 166,240 179,243"];
+	0 -> webserver [pos="e,188,290 99,231 122,246 154,268 179,284"];
+	0 -> dev [pos="e,189,159 111,195 133,185 159,173 180,163"];
+	0 -> work [pos="e,189,202 143,207 155,205 168,205 179,203"];
+	1 -> musicstudio [pos="e,188,56 100,114 123,100 155,78 180,62"];
+	1 -> dev [pos="e,189,143 128,137 145,139 163,140 179,142"];
+	1 -> work [pos="e,189,187 110,150 132,160 158,172 180,183"];
+	1 -> admin [pos="e,189,99 128,117 145,112 164,106 179,102"];
+	2 -> musicstudio [pos="e,180,38 144,38 152,38 161,38 170,38"];
+}
