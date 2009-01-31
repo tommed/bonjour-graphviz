@@ -11,3 +11,15 @@ REQUIREMENTS
 EXAMPLES
  ruby ./bonjour-graphviz.rb # generates a .dot and .png file for _device-info._tcp
  ruby ./bonjour-graphviz.rb "_http._tcp" # generate a .dot and .png file for _http._tcp
+
+
+EXTENDING BONJOUR _device-info._tcp
+	Inside the ./device-info/ directory is a bonjour config file for a particular platform. 
+	This extends the standard _device-info._tcp service to include useful info like: roles, owner, etc.. 
+	
+	INSTALL ON MAC
+		1. Edit the bonjour script file for your device
+		2. To install, copy (or link) the bonjour script AND the plist into the 
+		   /Library/LaunchDaemons directory and either reboot or type in: 
+		   "sudo launchctl load PLIST_FILEPATH".
+		3. Now run bonjour-graphviz.rb without any arguments to see a role mapping graph

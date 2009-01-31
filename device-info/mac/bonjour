@@ -1,0 +1,2 @@
+#/usr/bin/env bash
+dns-sd -R "NAME OF DEVICE (`hostname`)" _device-info._tcp local 2 "role=dev,webserver,ssc" "owner=tom.medhurst@gmail.com" "hostname=`hostname`" "os=mac-`defaults read loginwindow SystemVersionStampAsString`"
