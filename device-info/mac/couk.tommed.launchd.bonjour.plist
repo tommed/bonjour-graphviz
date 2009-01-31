@@ -7,7 +7,7 @@
 	<string>couk.tommed.launchd.bonjour</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>./bonjour</string>
+		<string>/Library/LaunchDaemons/bonjour</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
