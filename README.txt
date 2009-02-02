@@ -23,3 +23,9 @@ EXTENDING BONJOUR _device-info._tcp
 		   /Library/LaunchDaemons directory and either reboot or type in: 
 		   "sudo launchctl load PLIST_FILEPATH".
 		3. Now run bonjour-graphviz.rb without any arguments to see a role mapping graph
+		
+RUNNING THE CLIENT (Mac)
+ 1. Open a new terminal console
+ 2. Run `chomod +x PATH_TO_BONJOUR_GRAPHVIZ_SRC/gui-tools/mac/ZeroConfNetworkBrowser/GraphVizServer.rb`
+ 3. Run `ruby PATH_TO_BONJOUR_GRAPHVIZ_SRC/gui-tools/mac/ZeroConfNetworkBrowser/GraphVizServer.rb`
+ 4. Open, Build, and Run the XCode-Project
