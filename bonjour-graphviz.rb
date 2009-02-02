@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
+# =============================
+# This is a working prototype which contains snippets of code which will be used in the main application.
+#   - The top thread represents the BonjourReceiverService
+#   - The second part represents the GraphVizRendererService
+# =============================
+
 require 'graphviz'
 require 'dnssd'
 
