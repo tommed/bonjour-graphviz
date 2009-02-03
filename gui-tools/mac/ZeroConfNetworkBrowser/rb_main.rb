@@ -6,7 +6,11 @@
 #  Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 #
 
+ENV['BRIDGE_SUPPORT_PATH'] = '/Volumes/Data/src/svn-rubycocoa-apple/framework/bridge-support'
 require 'osx/cocoa'
+
+include OSX
+require_framework 'ImageKit'
 
 def rb_main_init
   path = OSX::NSBundle.mainBundle.resourcePath.fileSystemRepresentation

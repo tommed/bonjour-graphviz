@@ -27,8 +27,8 @@ class Discoverer
 	
 	# start browser
 	def start_browser(delegate, serviceType="_device-info._tcp")
-		puts "->start_browser"
 		self.stop_browser
+		puts "->start_browser"
 		@delegate = delegate
 		@servers = Hash.new
 		@serviceType = serviceType
@@ -61,10 +61,15 @@ class Discoverer
 		def watch_for_redraw
 			@renderThread = Thread.start do
 				while (true) do
-					if @requiresRedraw
-						@requiresRedraw = false
-						puts "redraw required from delegate.."
-						@delegate.changeOccured(@servers)
+					begin
+						if @requiresRedraw
+							@requiresRedraw = false
+							puts "redraw required from delegate.."
+							@delegate.changeOccured(@servers)
+						end
+					rescue => e
+						puts "ERROR from delegate: #{e.inspect}"
+						@delegate.showError("ERR03FROMDELEG: #{e.inspect}")
 					end
 					sleep 2
 				end

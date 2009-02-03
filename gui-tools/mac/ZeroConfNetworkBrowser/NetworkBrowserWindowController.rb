@@ -11,7 +11,7 @@ require 'discoverer'
 require 'graphvizproxy'
 
 class NetworkBrowserWindowController < OSX::NSWindowController
-	ib_outlet :service_type, :imageField, :serviceBrowser, :throbber
+	ib_outlet :service_type, :imageField, :serviceBrowser, :throbber, :serverListViewController
 	kvc_accessor :discoverer
 	
 	# on_load
@@ -20,8 +20,8 @@ class NetworkBrowserWindowController < OSX::NSWindowController
 		@proxy = GraphVizProxy.new
 	end
 	
-	def windowDidLoad
-		puts "->windowDidLoad"
+	def awakeFromNib
+		puts "->awakeFromNib"
 	end
 	
 	# pressed when service-type is changed
@@ -49,15 +49,19 @@ class NetworkBrowserWindowController < OSX::NSWindowController
 	def changeOccured(services)
 		puts "->changedOccurred(#{services.class})"
 		@services = services
+		# update server NSBrowser view
 		serviceCount = @services.nil? ? 0 : @services.keys.size
 		@serviceBrowser.setTitle_ofColumn("Service Type (#{serviceCount})", 0)
 		@serviceBrowser.needsDisplay
+		# update server IKImageBrowser view
+		@serverListViewController.setData(@services)
+		# update graph NSImageCell view
 		begin
 			result = @proxy.generate_chart_for(@service_type.stringValue, services)
 			if result == true
 				@imageField.setObjectValue(OSX::NSImage.alloc.initWithContentsOfFile("/tmp/topology.png"))
 			else
-				showError("error returned back from graphviz-server, check server logs.")
+				showError("Could not generate Graph, please check GraphViz-Server logs.")
 			end
 		rescue => e
 			puts "update_ui_ERROR: #{e.inspect}"
