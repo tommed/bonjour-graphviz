@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<!--Generated with glade3 3.4.5 on Sun Feb  8 13:18:54 2009 -->
+<glade-interface>
+  <widget class="GtkWindow" id="mainWindow">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">Available Servers</property>
+    <property name="default_width">400</property>
+    <property name="default_height">350</property>
+    <child>
+      <widget class="GtkTreeView" id="serverList">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="reorderable">True</property>
+        <property name="search_column">1</property>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>
