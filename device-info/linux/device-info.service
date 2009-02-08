@@ -1,1 +1,11 @@
-COMING SOON - Avahi Plug-in!
+<?xml version="1.0" standalone="no"?>
+<service-group>
+	<name replace-wildcards="yes">MACHINE DESCRIPTION (%h)</name>
+	<service>
+		<type>_device-info._tcp</type>
+		<txt-record>role=COMMA_SEPERATED_ROLES_HERE</txt-record>
+		<txt-record>os=ubuntu-8.10</txt-record>
+		<txt-record>owner=YOUR_EMAIL</txt-record>
+		<txt-record>hostname=HOSTNAME</txt-record>
+	</service>
+</service-group>
