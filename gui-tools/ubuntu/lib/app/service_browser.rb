@@ -7,7 +7,7 @@ module GNB
 
 	# services which the ServiceBrowser will search for
 	ZEROCONF_SERVICES_TO_LOOK_FOR = ["_device-info._tcp", "_ssh._tcp", "_appletv._tcp", "_http._tcp", "_ipp._tcp", 
-																	 "_sftp-ssh._tcp"]
+																	 "_sftp-ssh._tcp", "_workstation._tcp"]
 
 	# 
 	# This class is used to link this app to Avahi (bonjour for Linux enabled by default in Ubuntu 8.10)
@@ -37,6 +37,10 @@ module GNB
 			@threads.each { |t| t.exit! }
 		end
 
+		def resolve_server(meta)
+			DNSSD.resolve(meta.name, meta.type, meta.domain) {|d| yield(d); d.service.stop }
+		end
+
 		private
 			# starts a service browser of a particular type
 			def start_browser(service_type)
@@ -58,12 +62,17 @@ module GNB
 
 			# this reply contains a service-added event
 			def register_find(reply)
+				begin
 				puts "FOUND=> #{reply.name} (#{reply.type})"
-				@cache[reply.name] ||= Hash.new
-				@cache[reply.name][reply.type] = reply
-				DNSSD.resolve(reply.name, reply.type, reply.domain) do |resolved|
+				localName =get_name(reply)
+				@cache[localName] ||= Hash.new
+				@cache[localName][reply.type] = ZeroConfResult.new(reply)
+				resolve_server(reply) do |resolved|
 					puts "RESOLVED=>#{reply.name} (#{reply.type})"
-					@cache[reply.name][reply.type] = resolved
+					@cache[localName][reply.type].details=resolved
+				end
+				rescue => ex
+					puts "ERROR: " + ex.inspect
 				end
 			end
 
@@ -73,6 +82,25 @@ module GNB
 				@cache[reply.name].delete(reply.type) if @cache[reply.name].key?(reply.type)
 			end
 
+			def get_name(meta)
+				if meta.type == "_device-info._tcp."
+					return meta.name.match(/\(([^\)]+)\)/)[1].strip.capitalize
+				elsif meta.type == "_workstation._tcp."
+					return meta.name.match(/([^\[]+)/)[1].strip.capitalize
+				else
+					return meta.name.strip.capitalize
+				end
+			end
+
+	end
+
+	# contains the reply and resolution of a zeroconf object
+	class ZeroConfResult
+		attr_reader :meta
+		attr_accessor :details
+		def initialize(meta)
+			@meta = meta
+		end
 	end
 
 end
