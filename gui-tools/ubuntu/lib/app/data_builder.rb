@@ -22,6 +22,9 @@ module GNB
 			end
 			unless model_present
 				renderer = Gtk::CellRendererText.new
+				iconRenderer = Gtk::CellRendererPixbuf.new
+				iconRenderer.stock_id=Gtk::Stock::NETWORK
+				view.append_column(Gtk::TreeViewColumn.new("", iconRenderer))
 				view.append_column(Gtk::TreeViewColumn.new("Target", renderer, :text => 0))
 				view.append_column(Gtk::TreeViewColumn.new("Services Available", renderer, :text => 1))
 			end
@@ -45,8 +48,11 @@ module GNB
 			end
 			unless model_present
 				renderer = Gtk::CellRendererText.new
-				view.append_column(Gtk::TreeViewColumn.new("Property Name", renderer, :text => 0))
-				view.append_column(Gtk::TreeViewColumn.new("Property Value", renderer, :text => 1))
+				iconRenderer = Gtk::CellRendererPixbuf.new
+				iconRenderer.stock_id=Gtk::Stock::INFO
+				view.append_column(Gtk::TreeViewColumn.new("", iconRenderer))
+				view.append_column(Gtk::TreeViewColumn.new("Name", renderer, :text => 0))
+				view.append_column(Gtk::TreeViewColumn.new("Value", renderer, :text => 1))
 			end
 		end
 
