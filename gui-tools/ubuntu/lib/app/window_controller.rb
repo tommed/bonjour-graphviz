@@ -39,7 +39,7 @@ module GNB
 						rescue => ex
 							puts "ERR:SERVICEWATCHERLOOP=>#{ex.inspect}"
 						end
-						sleep 2
+						sleep 1
 					end
 				end
 				@service_browser.start
@@ -75,6 +75,8 @@ module GNB
 				types = []
 				@glade.get_widget('sshConnectButton').hide
 				@glade.get_widget('sftpConnectButton').hide
+				@glade.get_widget('vncConnectButton').hide
+				@glade.get_widget('httpConnectButton').hide
 				@glade.get_widget('details_name').text = row_data[0]
 				@glade.get_widget('details_ports').text = ""
 				@glade.get_widget('details_target').text = ""
@@ -94,6 +96,12 @@ module GNB
 					elsif zeroconfData.meta.type=="_sftp-ssh._tcp."
 						@glade.get_widget('sftpConnectButton').show	
 						@sftpData = zeroconfData
+					elsif zeroconfData.meta.type=="_http._tcp."
+						@glade.get_widget('httpConnectButton').show
+						@httpData = zeroconfData
+					elsif zeroconfData.meta.type=="_rfb._tcp."
+						@glade.get_widget('vncConnectButton').show
+						@vncData = zeroconfData
 					end
 				end
 				@glade.get_widget('details_types').text = types.join(', ')
@@ -104,6 +112,20 @@ module GNB
 				if @sftpData					
 					target = @sftpData.meta.name+"."+@sftpData.meta.domain
 					system("nautilus sftp://#{target}")
+				end
+			end
+
+			def onHTTPConnect_clicked
+				if @httpData					
+					target = @glade.get_widget('details_target').text
+					system("firefox http://#{target}")
+				end
+			end
+
+			def	onVNCConnect_clicked
+				if @vncData					
+					target = @vncData.meta.name+"."+@vncData.meta.domain
+					system("vinagre \"#{target}\"")
 				end
 			end
 

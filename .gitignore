@@ -1,2 +1,3 @@
 gui-tools/mac/ZeroConfNetworkBrowser/build/
 .DS_Store
+*.rb~

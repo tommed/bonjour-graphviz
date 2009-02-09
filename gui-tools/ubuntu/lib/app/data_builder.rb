@@ -59,6 +59,8 @@ module GNB
 				when "_ipp._tcp.": "IP-Printer"
 				when "_appletv._tcp.": "AppleTV"
 				when "_http._tcp.": "HTTP"
+				when "_presence._tcp.": "iChat"
+				when "_rfb._tcp.": "Remote-Desktop"
 				else "Unknown"
 			end
 		end

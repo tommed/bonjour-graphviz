@@ -6,8 +6,9 @@ require 'dnssd'
 module GNB
 
 	# services which the ServiceBrowser will search for
-	ZEROCONF_SERVICES_TO_LOOK_FOR = ["_device-info._tcp", "_ssh._tcp", "_appletv._tcp", "_http._tcp", "_ipp._tcp", 
-																	 "_sftp-ssh._tcp", "_workstation._tcp"]
+	ZEROCONF_SERVICES_TO_LOOK_FOR = ["_device-info._tcp", "_ssh._tcp", "_appletv._tcp",
+		"_http._tcp", "_ipp._tcp", "_sftp-ssh._tcp", "_workstation._tcp", "_presence._tcp",
+		"_rfb._tcp"]
 
 	# 
 	# This class is used to link this app to Avahi (bonjour for Linux enabled by default in Ubuntu 8.10)
