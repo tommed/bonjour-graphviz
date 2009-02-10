@@ -3,6 +3,7 @@
 #
 require File.dirname(__FILE__)+'/service_browser'
 require File.dirname(__FILE__)+'/data_builder'
+require File.dirname(__FILE__)+'/chat_window_controller'
 require 'vte'
 
 module GNB
@@ -77,6 +78,7 @@ module GNB
 				@glade.get_widget('sftpConnectButton').hide
 				@glade.get_widget('vncConnectButton').hide
 				@glade.get_widget('httpConnectButton').hide
+				@glade.get_widget('ichatConnectButton').hide
 				@glade.get_widget('details_name').text = row_data[0]
 				@glade.get_widget('details_ports').text = ""
 				@glade.get_widget('details_target').text = ""
@@ -102,6 +104,9 @@ module GNB
 					elsif zeroconfData.meta.type=="_rfb._tcp."
 						@glade.get_widget('vncConnectButton').show
 						@vncData = zeroconfData
+					elsif zeroconfData.meta.type=="_presence._tcp."
+						@glade.get_widget('ichatConnectButton').show
+						@ichatData = zeroconfData
 					end
 				end
 				@glade.get_widget('details_types').text = types.join(', ')
@@ -112,6 +117,16 @@ module GNB
 				if @sftpData					
 					target = @sftpData.meta.name+"."+@sftpData.meta.domain
 					system("nautilus sftp://#{target}")
+				end
+			end
+
+			def	onICHATConnect_clicked
+				if @ichatData
+					target = @ichatData.details.target
+					port = @ichatData.details.port
+					name = @ichatData.details.text_record['1st']
+					address = @ichatData.meta.name
+					ChatWindowController.new(@glade).connect(name, target, port, address)
 				end
 			end
 

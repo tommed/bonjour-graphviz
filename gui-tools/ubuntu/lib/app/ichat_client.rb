@@ -13,10 +13,10 @@ EOF
 
 module GNB
 	class IChatClient
-		def initialize(nickname, recipient_name, recipient, status="avail", their_port=5298)
+		def initialize(nickname, recipient_name, recipient, recipient_addr, status="avail", their_port=5298)
 			@nickname = nickname
 			@sender = nickname + "@" + %x{hostname}.strip
-			@recip_full = recipient+"@"+recipient_name
+			@recip_full = recipient_addr
 			@recipient = recipient
 			@recipient_name = recipient_name
 			@status = status
@@ -49,7 +49,7 @@ EOF
 				@dns_thread = Thread.start do
 					@dns_service = DNSSD.register(@sender, "_presence._tcp", "local", 0, {"status"=>"avail", "txtvers"=>"1", "1st"=>@nickname, "last"=>"(via GNB-Network-Browser)"}) {|reply| }
 				end
-				sleep(5)
+				sleep(7) # give clients a chance to register this client
 			end
 
 			def create_connection(start_block)
