@@ -68,17 +68,17 @@ EOF
 			end
 
 			def handle_response(mesg, &block)
-				# TODO: handle xml here with hpricot
-				puts "response found"
+				doc = Hpricot(mesg)
+				mesg = (doc/'message/body').text.strip
 				STDOUT.flush
-				block.call(mesg)
+				block.call(mesg) if mesg && !mesg.empty?
 			end
 	end
 end
 
 # tests ichat functionality from this file
 if __FILE__ == $0
-	client = GNB::IChatClient.new("tom", "tom", "192.168.1.76")
+	client = GNB::IChatClient.new("tom", "tom", "MusicDesk", "tom@MusicDesk")
 	client.start {|response| puts "RESPONSE:"+response }
 	client.send_mesg("hello world from gnb")
 	client.stop

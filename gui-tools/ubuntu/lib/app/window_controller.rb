@@ -127,6 +127,7 @@ module GNB
 					name = @ichatData.details.text_record['1st']
 					address = @ichatData.meta.name
 					ChatWindowController.new(@glade).connect(name, target, port, address)
+					@detailsWindow.hide
 				end
 			end
 

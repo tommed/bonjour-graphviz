@@ -9,19 +9,40 @@ module GNB
 
 		def connect(name, target, port, address)
 			@name, @target, @port, @address = name, target, port, address
+			@handleResponses = true
+			# clear any old conversations
 			puts 'you want to chat with ' + @address
 			@conversation = @glade.get_widget('conversation')
-			@conversation.buffer.text = '' # clear any old conversations
+			@conversation.buffer.text = '' 
+			# setup chat window
 			@window = @glade.get_widget('chatWindow')
 			@window.show
-			@client = IChatClient.new("GNBUser", name, target, address, "avail", port)
-			@client.start do |resp|
-				@conversation.buffer.insert(0, "\n<i>#{@name} said:</i> \"#{resp}\"\n")
+			@window.signal_connect('delete_event') { stop }
+			@glade.get_widget('chatSendButton').signal_connect('clicked') { self.send_message }
+			# start the client
+			@clientThread = Thread.start do 
+				@client = IChatClient.new("GNBUser", name, target, address, "avail", port)
+				@client.start do |resp|
+					@conversation.buffer.insert(@conversation.buffer.start_iter, "\n#{@name} said: \"#{resp}\"\n") if @handleResponses
+				end
 			end
-			@client.send_mesg("Hello World!")
-			sleep(20)
-			@client.stop
-			@window.hide
+		end
+
+		def send_message
+			chatInput = @glade.get_widget('chatInput')
+			message = chatInput.text
+			@client.send_mesg message
+			@conversation.buffer.insert(@conversation.buffer.start_iter, "\nYou said: \"#{message}\"\n")
+			chatInput.text="" # clear old message out
+		end
+
+		def stop
+			begin
+				@handleResponses = false
+				@client.stop if @client
+			rescue
+				@clientThread.exit! if @clientThread
+			end
 		end
 	end
 end
