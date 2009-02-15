@@ -23,6 +23,10 @@ module GNB
 			@their_port = their_port
 		end
 
+		def on_ready(&block)
+			@onCreated = block
+		end
+
 		def start(&block)
 			advertise_ichat
 			create_connection(block)
@@ -60,6 +64,7 @@ EOF
 				puts "waiting for header swap.."
 				@socket.recv(1000)
 				puts "adding listener.."
+				@onCreated.call() if @onCreated
 				@listener_thread = Thread.start(@socket, start_block) do |socket,start_block|
 					while (true)
 						handle_response(socket.recv(2000), &start_block)

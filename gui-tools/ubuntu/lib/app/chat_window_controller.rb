@@ -18,22 +18,30 @@ module GNB
 			@window = @glade.get_widget('chatWindow')
 			@window.show
 			@window.signal_connect('delete_event') { stop }
+			@conversation.buffer.insert(@conversation.buffer.start_iter, "establishing a connection, please wait...\n")
 			@glade.get_widget('chatSendButton').signal_connect('clicked') { self.send_message }
 			# start the client
 			@clientThread = Thread.start do 
 				@client = IChatClient.new("GNBUser", name, target, address, "avail", port)
+				@client.on_ready { self.on_ready }
 				@client.start do |resp|
 					@conversation.buffer.insert(@conversation.buffer.start_iter, "\n#{@name} said: \"#{resp}\"\n") if @handleResponses
 				end
 			end
 		end
 
+		def on_ready
+			@chatInput = @glade.get_widget('chatInput')
+			@chatInput.visible=true
+			@glade.get_widget('chatSendButton').visible=true
+			@conversation.buffer.text = ''
+		end
+
 		def send_message
-			chatInput = @glade.get_widget('chatInput')
-			message = chatInput.text
+			message = @chatInput.text
 			@client.send_mesg message
 			@conversation.buffer.insert(@conversation.buffer.start_iter, "\nYou said: \"#{message}\"\n")
-			chatInput.text="" # clear old message out
+			@chatInput.text="" # clear old message out
 		end
 
 		def stop
