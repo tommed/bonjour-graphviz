@@ -3,23 +3,41 @@ require File.dirname(__FILE__)+'/../ichat_client'
 
 module GNB
 	class ChatWindowController
-		def initialize(glade)
-			@glade = glade
+
+		def initialize
+			# build the ui
+			@window = Window.new
+			@window.border_width=4
+			@window.window_position=Window::POS_CENTER
+			@window.set_size_request 500, 400
+			@window.signal_connect('delete_event') { stop }
+			vbox = VBox.new false, 4
+			@window.add vbox
+			# conversation window
+			@conversation = TextView.new 
+			@conversation.buffer.text='Connecting please wait...'
+			@conversation.editable=false
+			vbox.pack_start @conversation, true, true
+			@hbox = HBox.new
+			vbox.pack_start @hbox, false, false
+			# chat input
+			@chatInput = Entry.new
+			@hbox.pack_start @chatInput, true, true
+			# chat button
+			@chatSendButton = Button.new '_Send', true
+			@chatSendButton.image=Image.new(Stock::OK, IconSize::BUTTON)
+			@chatSendButton.signal_connect('clicked') { send_message }
+			@chatSendButton.sensitive=false
+			@hbox.pack_start @chatSendButton, false, false
+			@window.show_all	
 		end
 
 		def connect(name, target, port, address)
 			@name, @target, @port, @address = name, target, port, address
 			@handleResponses = true
+			@window.title="iChat with #{@name}"
 			# clear any old conversations
 			puts 'you want to chat with ' + @address
-			@conversation = @glade.get_widget('conversation')
-			@conversation.buffer.text = '' 
-			# setup chat window
-			@window = @glade.get_widget('chatWindow')
-			@window.show
-			@window.signal_connect('delete_event') { stop }
-			@conversation.buffer.insert(@conversation.buffer.start_iter, "establishing a connection, please wait...\n")
-			@glade.get_widget('chatSendButton').signal_connect('clicked') { self.send_message }
 			# start the client
 			@clientThread = Thread.start do 
 				@client = IChatClient.new("GNBUser", name, target, address, "avail", port)
@@ -31,16 +49,14 @@ module GNB
 		end
 
 		def on_ready
-			@chatInput = @glade.get_widget('chatInput')
-			@chatInput.visible=true
-			@glade.get_widget('chatSendButton').visible=true
-			@conversation.buffer.text = ''
+			@chatSendButton.sensitive=true
+			@conversation.buffer.text = "Connected! You may now send a message to #{@name}!"
 		end
 
 		def send_message
 			message = @chatInput.text
 			@client.send_mesg message
-			@conversation.buffer.insert(@conversation.buffer.start_iter, "\nYou said: \"#{message}\"\n")
+			@conversation.buffer.insert(@conversation.buffer.start_iter, "\nYou said: \"#{message}\"\n\n")
 			@chatInput.text="" # clear old message out
 		end
 

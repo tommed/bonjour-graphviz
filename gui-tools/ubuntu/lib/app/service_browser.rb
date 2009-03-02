@@ -2,7 +2,7 @@
 #
 #
 require 'dnssd'
-require File.dirname(__FILE__)+"/#{GNB_PLATFORM}/config_controller"
+#require File.dirname(__FILE__)+"/#{GNB_PLATFORM}/config_controller"
 
 module GNB
 
@@ -85,11 +85,11 @@ module GNB
 			end
 
 			def get_name(meta)
-				hash = ConfigController.instance.get_hash(meta)
-				custom_name = ConfigController.instance.get_for(hash)
-				if custom_name
-					return custom_name
-				elsif meta.type == "_device-info._tcp."
+#				hash = ConfigController.instance.get_hash(meta)
+#				custom_name = ConfigController.instance.get_for(hash)
+#				if custom_name
+#					return custom_name
+				if meta.type == "_device-info._tcp."
 					return meta.name.match(/\(([^\)]+)\)/)[1].strip.capitalize
 				elsif meta.type == "_workstation._tcp."
 					return meta.name.match(/([^\[]+)/)[1].strip.capitalize
