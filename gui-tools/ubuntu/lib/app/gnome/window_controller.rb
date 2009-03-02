@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 #
 #
-require File.dirname(__FILE__)+'/service_browser'
+require File.dirname(__FILE__)+'/../service_browser'
 require File.dirname(__FILE__)+'/data_builder'
 require File.dirname(__FILE__)+'/chat_window_controller'
+require File.dirname(__FILE__)+'/config_controller'
 require 'vte'
 
 module GNB
@@ -20,12 +21,20 @@ module GNB
 			start
 			# configure details window
 			@detailsWindow = @glade.get_widget('detailsWindow')
-			@glade.get_widget('detailsWindow_closeButton').signal_connect('pressed') { @detailsWindow.hide }
+			@glade.get_widget('detailsWindow_closeButton').signal_connect('pressed') { hide_details_window }
 			@glade.get_widget('sshConnectButton').signal_connect('pressed') { onSSHConnect_clicked }
 			@glade.get_widget('sftpConnectButton').signal_connect('pressed') { onSFTPConnect_clicked }
 		end
 
 		private
+
+			def hide_details_window
+				@detailsWindow.hide
+				if @nameHasChanged
+					@service_browser.stop
+					start
+				end
+			end
 
 			# start the service browser
 			def start
@@ -74,6 +83,7 @@ module GNB
 			# user is requesting details for server
 			def show_server_details(row_data)
 				types = []
+				@nameHasChanged = false
 				@glade.get_widget('sshConnectButton').hide
 				@glade.get_widget('sftpConnectButton').hide
 				@glade.get_widget('vncConnectButton').hide
@@ -84,6 +94,7 @@ module GNB
 				@glade.get_widget('details_target').text = ""
 				GNB::DataBuilder.build_text_record_view(@glade.get_widget('detailsTxtRecords'), row_data[2])
 				row_data[2].each do |type,zeroconfData| 
+					@lastMeta = zeroconfData
 					@glade.get_widget('details_domain').text = zeroconfData.meta.domain
 					types << GNB::DataBuilder.resolve_service_type(zeroconfData.meta.type)
 					if zeroconfData.details
@@ -149,6 +160,15 @@ module GNB
 				if @sshData
 					target = @sshData.meta.name+"."+@sshData.meta.domain
 					system("gnome-terminal -e \"ssh #{target}\"")
+				end
+			end
+
+			def onServerDetails_nameChanged
+				if @lastMeta
+					hash = ConfigController.instance.get_hash(@lastMeta.meta)
+					newValue = @glade.get_widget('details_name').text
+					ConfigController.instance.set_for(hash, newValue)
+					@nameHasChanged = newValue != @lastMeta.meta.name
 				end
 			end
 	end

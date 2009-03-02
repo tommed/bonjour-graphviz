@@ -10,7 +10,7 @@ module GNB
 		def self.build(view, data)
 			puts "binding data to server_list glade-view.."
 			model_present = view.model
-			view.model = Gtk::ListStore.new(String, String, Hash) unless model_present
+			view.model = Gtk::ListStore.new(String, String, Hash, String) unless model_present		
 			view.model.clear
 			data.each do |k, v|
 				if v.keys.size > 0

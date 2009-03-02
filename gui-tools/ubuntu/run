@@ -2,9 +2,11 @@
 #
 # This file is gererated by ruby-glade-create-template 1.1.4.
 #
+GNB_PLATFORM = 'gnome'
+
 require 'rubygems'
 require 'libglade2'
-require File.dirname(__FILE__)+'/lib/app/window_controller'
+require File.dirname(__FILE__)+"/lib/app/#{GNB_PLATFORM}/window_controller"
 
 class InterfaceGlade
   include GetText
