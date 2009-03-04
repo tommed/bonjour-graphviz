@@ -5,6 +5,12 @@
 GNB_PLATFORM = 'gnome'
 
 require 'rubygems'
-require File.dirname(__FILE__)+"/lib/app/#{GNB_PLATFORM}/server_list_controller"
+if __FILE__ == '/usr/bin/gnb'
+	puts "in bin #{__FILE__}"
+	require "/usr/lib/gnb/lib/app/#{GNB_PLATFORM}/server_list_controller"
+else
+	puts "not in bin #{__FILE__}"
+	require File.dirname(__FILE__)+"/lib/app/#{GNB_PLATFORM}/server_list_controller"
+end
 
 GNB::ServerListController.new.run
