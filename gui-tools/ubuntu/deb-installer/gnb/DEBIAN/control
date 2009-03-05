@@ -1,0 +1,14 @@
+Package: gnb
+Version: 0.3.0-0
+Architecture: i386
+Maintainer: Tom Medhurst <tom.medhurst+gnb@gmail.com>
+Installed-Size: 117
+Pre-Depends: ruby1.8
+Depends: rubygems1.8
+Section: net
+Priority: optional
+Description: GNOME Network Browser
+ GNOME Network Browser allows you to browse your network
+ in less time than it takes to say: "Wow! That was golly quick!!".
+ .
+ Developed by http://www.tommed.co.uk/

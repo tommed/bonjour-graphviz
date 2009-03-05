@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+rm -R gnb/usr/lib/gnb
+mkdir gnb/usr/lib/gnb
+cp -r ../program/. gnb/usr/lib/gnb/
+dpkg -b gnb
+
+mv gnb.deb builds/
+rm -R gnb/usr/lib/gnb 
