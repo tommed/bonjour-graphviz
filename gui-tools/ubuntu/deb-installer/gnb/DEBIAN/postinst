@@ -20,7 +20,7 @@ case "$1" in
 		echo "installing dnssd(custom linux version)"
 		gem install /usr/lib/gnb/prereqs/dnssd-0.6.0_linux.gem
 		echo "installing hpricot"
-		gem install hpricot
+		gem install hpricot --no-rdoc --no-ri
 		echo "creating app link"
 		ln -s /usr/lib/gnb/run /usr/bin/gnb
 		chmod +x /usr/bin/gnb
