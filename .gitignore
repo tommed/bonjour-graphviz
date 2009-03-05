@@ -1,3 +1,4 @@
+gui-tools/ubuntu/deb-installer/builds/*.deb
 gui-tools/mac/ZeroConfNetworkBrowser/build/
 .DS_Store
 *.rb~
