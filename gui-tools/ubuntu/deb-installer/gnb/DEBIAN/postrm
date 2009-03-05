@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for GNB
+# postrm script for GNB
 #
 # see: dh_installdeb(1)
 
@@ -16,22 +16,18 @@
 # the debian-policy package
 
 case "$1" in
-    configure)
-		echo "installing dnssd(custom linux version)"
-		gem install /usr/lib/gnb/prereqs/dnssd-0.6.0_linux.gem
-		echo "installing hpricot"
-		gem install hpricot
-		echo "creating app link"
-		ln -s /usr/lib/gnb/run /usr/bin/gnb
-		chmod +x /usr/bin/gnb
-		echo "install complete."
+
+		remove)
+		echo "removing..."
+		rm /usr/bin/gnb
+		gem uninstall dnssd
 	;;
 
     abort-upgrade|abort-remove|abort-deconfigure|upgrade)
     ;;
 
     *)
-        echo "postinst called with unknown argument '$1'" >&2
+        echo "postrm called with unknown argument '$1'" >&2
         exit 1
     ;;
 esac

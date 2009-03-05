@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # This builder takes the data from the service_browser and the
 # list/tree-view from the GUI and merges them together.

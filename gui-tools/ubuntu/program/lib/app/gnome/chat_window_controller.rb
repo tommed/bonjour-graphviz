@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 require File.dirname(__FILE__)+'/../ichat_client'
 
 module GNB

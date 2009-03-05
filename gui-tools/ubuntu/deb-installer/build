@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-rm -R gnb/usr/lib/gnb
+rm -R gnb/usr/lib/gnb 2> /dev/null
 mkdir gnb/usr/lib/gnb
 cp -r ../program/. gnb/usr/lib/gnb/
 dpkg -b gnb
 
 mv gnb.deb builds/
 rm -R gnb/usr/lib/gnb 
+
+echo "Build Complete."

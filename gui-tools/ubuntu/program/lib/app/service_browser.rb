@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-#
-#
 require 'dnssd'
 #require File.dirname(__FILE__)+"/#{GNB_PLATFORM}/config_controller"
 

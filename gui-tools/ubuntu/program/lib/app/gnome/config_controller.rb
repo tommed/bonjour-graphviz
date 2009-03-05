@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require 'singleton'
 require 'gconf2'
 require 'digest/md5'

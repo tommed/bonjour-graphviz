@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-#
-#
 require File.dirname(__FILE__)+'/../service_browser'
 require File.dirname(__FILE__)+'/data_builder'
 require File.dirname(__FILE__)+'/chat_window_controller'

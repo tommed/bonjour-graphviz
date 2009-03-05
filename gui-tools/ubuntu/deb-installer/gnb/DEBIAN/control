@@ -4,7 +4,7 @@ Architecture: i386
 Maintainer: Tom Medhurst <tom.medhurst+gnb@gmail.com>
 Installed-Size: 117
 Pre-Depends: ruby1.8
-Depends: rubygems1.8
+Depends: rubygems1.8, ruby-gnome2, ruby1.8-dev (>=1.8.7), build-essential
 Section: net
 Priority: optional
 Description: GNOME Network Browser
