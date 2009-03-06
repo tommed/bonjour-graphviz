@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Browse your Network in seconds!
+Encoding=UTF-8
+Exec=/usr/lib/gnb/run
+Hidden=false
+Icon=gnome-network-preferences
+Name=GNB Network Browser
+Terminal=false
+Type=Application
+Categories=System;
+Version=1.0

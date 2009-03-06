@@ -24,6 +24,8 @@ case "$1" in
 		echo "creating app link"
 		ln -s /usr/lib/gnb/run /usr/bin/gnb
 		chmod +x /usr/bin/gnb
+		echo "copying menu shortcut"
+		cp /usr/lib/gnb/gnb.desktop /usr/share/applications/gnb.desktop
 		echo "install complete."
 	;;
 

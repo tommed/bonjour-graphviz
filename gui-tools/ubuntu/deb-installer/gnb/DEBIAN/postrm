@@ -21,6 +21,9 @@ case "$1" in
 		echo "removing..."
 		rm /usr/bin/gnb
 		gem uninstall dnssd
+		echo "removing menu shortcut"
+		rm /usr/share/applications/gnb.desktop
+		echo "done."
 	;;
 
     abort-upgrade|abort-remove|abort-deconfigure|upgrade)
