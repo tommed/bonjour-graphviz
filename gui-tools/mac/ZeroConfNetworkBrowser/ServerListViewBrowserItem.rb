@@ -9,7 +9,8 @@
 require 'osx/cocoa'
 
 class ServerListViewBrowserItem
-
+	include OSX
+	
 	def initialize(urn, title, subtitle)
 		@image_uid = urn
 		@title = title
@@ -33,11 +34,13 @@ class ServerListViewBrowserItem
 	end
 	
 	def imageRepresentation
-		puts "->imageRepresentation"
+		#puts "->imageRepresentation"
 		return @image unless @image.nil?
-		puts "->retrieving image from bundle.."
-		imagePath = OSX::NSBundle.mainBundle.pathForResource_ofType("computer", "png")
-		return @image = OSX::NSImage.new.initWithContentsOfFile(imagePath)
+		#puts "->retrieving image from bundle.."
+		#puts "number for root: " + NSNumber.numberWithUnsignedLong('root')
+		#imagePath = NSWorkspace.sharedWorkspace.iconForFileType('root')
+		imagePath = OSX::NSWorkspace.sharedWorkspace.iconForFileType(OSX::NSFileTypeForHFSTypeCode('root')) #NSWorkspace.sharedWorkspace.iconForFileType("numbers"); #::NSBundle.mainBundle.pathForResource_ofType("computer", "png")
+		return @image = imagePath #OSX::NSImage.new.initWithContentsOfFile(imagePath)
 	end
 
 end

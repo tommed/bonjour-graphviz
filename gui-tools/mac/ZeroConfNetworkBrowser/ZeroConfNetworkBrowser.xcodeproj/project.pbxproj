@@ -13,11 +13,12 @@
 		4DDCA70A0ACC9A6100E082CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		4DDCA70C0ACC9A6100E082CE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		4DDCA70D0ACC9A6100E082CE /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */; };
+		E208DF5C0F50BC740030BA9C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E208DF5B0F50BC740030BA9C /* CoreServices.framework */; };
 		E28555030F37C5A100E87725 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28555020F37C5A100E87725 /* QuartzCore.framework */; };
 		E28555350F37C5B500E87725 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28555340F37C5B500E87725 /* Quartz.framework */; };
-		E28555810F37C85900E87725 /* computer.png in Resources */ = {isa = PBXBuildFile; fileRef = E28555800F37C85900E87725 /* computer.png */; };
 		E2AAF0C50F37B3CF0049E4AC /* ServerListViewController.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2AAF0C40F37B3CF0049E4AC /* ServerListViewController.rb */; };
 		E2AAF0DE0F37B61B0049E4AC /* ServerListViewBrowserItem.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2AAF0DD0F37B61B0049E4AC /* ServerListViewBrowserItem.rb */; };
+		E2BA44740F3A4C050083E28F /* ServerDetailsController.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2BA44730F3A4C050083E28F /* ServerDetailsController.rb */; };
 		E2E15DBA0F375F0800CCFB2A /* NetworkBrowserWindowController.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2E15DB90F375F0800CCFB2A /* NetworkBrowserWindowController.rb */; };
 		E2E15DBE0F375F8300CCFB2A /* Discoverer.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2E15DBB0F375F8300CCFB2A /* Discoverer.rb */; };
 		E2E15DBF0F375F8300CCFB2A /* GraphVizProxy.rb in Resources */ = {isa = PBXBuildFile; fileRef = E2E15DBC0F375F8300CCFB2A /* GraphVizProxy.rb */; };
@@ -33,11 +34,12 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4DDCA7110ACC9A6100E082CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DDCA7120ACC9A6100E082CE /* ZeroConfNetworkBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeroConfNetworkBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E208DF5B0F50BC740030BA9C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E28555020F37C5A100E87725 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		E28555340F37C5B500E87725 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
-		E28555800F37C85900E87725 /* computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = computer.png; sourceTree = "<group>"; };
 		E2AAF0C40F37B3CF0049E4AC /* ServerListViewController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ServerListViewController.rb; sourceTree = "<group>"; };
 		E2AAF0DD0F37B61B0049E4AC /* ServerListViewBrowserItem.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ServerListViewBrowserItem.rb; sourceTree = "<group>"; };
+		E2BA44730F3A4C050083E28F /* ServerDetailsController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ServerDetailsController.rb; sourceTree = "<group>"; };
 		E2E15DB90F375F0800CCFB2A /* NetworkBrowserWindowController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = NetworkBrowserWindowController.rb; sourceTree = "<group>"; };
 		E2E15DBB0F375F8300CCFB2A /* Discoverer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Discoverer.rb; sourceTree = "<group>"; };
 		E2E15DBC0F375F8300CCFB2A /* GraphVizProxy.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = GraphVizProxy.rb; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				4DDCA70D0ACC9A6100E082CE /* RubyCocoa.framework in Frameworks */,
 				E28555030F37C5A100E87725 /* QuartzCore.framework in Frameworks */,
 				E28555350F37C5B500E87725 /* Quartz.framework in Frameworks */,
+				E208DF5C0F50BC740030BA9C /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +72,7 @@
 				E2E15DB90F375F0800CCFB2A /* NetworkBrowserWindowController.rb */,
 				E2AAF0C40F37B3CF0049E4AC /* ServerListViewController.rb */,
 				E2AAF0DD0F37B61B0049E4AC /* ServerListViewBrowserItem.rb */,
+				E2BA44730F3A4C050083E28F /* ServerDetailsController.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -76,6 +80,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E208DF5B0F50BC740030BA9C /* CoreServices.framework */,
 				E28555340F37C5B500E87725 /* Quartz.framework */,
 				E28555020F37C5A100E87725 /* QuartzCore.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
@@ -145,7 +150,6 @@
 		E2AAF0BE0F37B3870049E4AC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E28555800F37C85900E87725 /* computer.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -222,7 +226,7 @@
 				E2E15DC00F375F8300CCFB2A /* GraphVizServer.rb in Resources */,
 				E2AAF0C50F37B3CF0049E4AC /* ServerListViewController.rb in Resources */,
 				E2AAF0DE0F37B61B0049E4AC /* ServerListViewBrowserItem.rb in Resources */,
-				E28555810F37C85900E87725 /* computer.png in Resources */,
+				E2BA44740F3A4C050083E28F /* ServerDetailsController.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
